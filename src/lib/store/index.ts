@@ -1,65 +1,97 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { User, Subject, Conversation, Notification } from '@/types';
+import { User, Conversation, Notification, Message } from '@/types';
+import { authApi, conversationsApi } from '@/lib/api';
 
 interface AuthState {
   user: User | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  error: string | null;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, name: string) => Promise<void>;
   logout: () => void;
-  setUser: (user: User | null) => void;
+  clearError: () => void;
+  initAuth: () => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       isAuthenticated: false,
       isLoading: false,
+      error: null,
       
       login: async (email: string, password: string) => {
-        set({ isLoading: true });
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        const mockUser: User = {
-          id: '1',
-          email,
-          name: 'Nguyen Van A',
-          role: email.includes('admin') ? 'admin' : 'user',
-          createdAt: new Date(),
-        };
-        
-        set({ user: mockUser, isAuthenticated: true, isLoading: false });
+        set({ isLoading: true, error: null });
+        try {
+          const response = await authApi.login(email, password);
+          const { user, token } = response.data;
+          
+          localStorage.setItem('token', token);
+          set({ 
+            user, 
+            isAuthenticated: true, 
+            isLoading: false,
+            error: null 
+          });
+        } catch (error: any) {
+          set({ 
+            isLoading: false, 
+            error: error.response?.data?.error || 'Đăng nhập thất bại' 
+          });
+          throw error;
+        }
       },
       
       register: async (email: string, password: string, name: string) => {
-        set({ isLoading: true });
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        
-        const mockUser: User = {
-          id: '1',
-          email,
-          name,
-          role: 'user',
-          createdAt: new Date(),
-        };
-        
-        set({ user: mockUser, isAuthenticated: true, isLoading: false });
+        set({ isLoading: true, error: null });
+        try {
+          const response = await authApi.register(email, password, name);
+          const { user, token } = response.data;
+          
+          localStorage.setItem('token', token);
+          set({ 
+            user, 
+            isAuthenticated: true, 
+            isLoading: false,
+            error: null 
+          });
+        } catch (error: any) {
+          set({ 
+            isLoading: false, 
+            error: error.response?.data?.error || 'Đăng ký thất bại' 
+          });
+          throw error;
+        }
       },
       
       logout: () => {
-        set({ user: null, isAuthenticated: false });
+        localStorage.removeItem('token');
+        set({ user: null, isAuthenticated: false, error: null });
       },
       
-      setUser: (user) => {
-        set({ user, isAuthenticated: !!user });
+      clearError: () => {
+        set({ error: null });
+      },
+      
+      initAuth: async () => {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+        
+        try {
+          const response = await authApi.getMe();
+          set({ user: response.data.user, isAuthenticated: true });
+        } catch (error) {
+          localStorage.removeItem('token');
+          set({ user: null, isAuthenticated: false });
+        }
       },
     }),
     {
       name: 'auth-storage',
+      partialize: (state) => ({ user: state.user, isAuthenticated: state.isAuthenticated }),
     }
   )
 );
@@ -85,26 +117,97 @@ export const useUIStore = create<UIState>()((set) => ({
 interface ChatState {
   conversations: Conversation[];
   activeConversation: Conversation | null;
+  messages: Message[];
   unreadCount: number;
+  isLoading: boolean;
   setConversations: (conversations: Conversation[]) => void;
   setActiveConversation: (conversation: Conversation | null) => void;
-  addMessage: (conversationId: string, message: any) => void;
+  setMessages: (messages: Message[]) => void;
+  addMessage: (message: Message) => void;
+  fetchConversations: () => Promise<void>;
+  fetchMessages: (conversationId: string) => Promise<void>;
+  sendMessage: (conversationId: string, content: string) => Promise<void>;
+  createConversation: (participantIds: string[]) => Promise<Conversation>;
 }
 
-export const useChatStore = create<ChatState>()((set) => ({
+export const useChatStore = create<ChatState>()((set, get) => ({
   conversations: [],
   activeConversation: null,
+  messages: [],
   unreadCount: 0,
+  isLoading: false,
+  
   setConversations: (conversations) => set({ conversations }),
   setActiveConversation: (conversation) => set({ activeConversation: conversation }),
-  addMessage: (conversationId, message) => {
+  setMessages: (messages) => set({ messages }),
+  
+  addMessage: (message) => {
     set((state) => ({
+      messages: [...state.messages, message],
       conversations: state.conversations.map(conv =>
-        conv.id === conversationId
+        conv.id === message.conversationId
           ? { ...conv, lastMessage: message }
           : conv
       ),
     }));
+  },
+  
+  fetchConversations: async () => {
+    try {
+      const response = await conversationsApi.getAll();
+      set({ conversations: response.data });
+    } catch (error) {
+      console.error('Failed to fetch conversations:', error);
+    }
+  },
+  
+  fetchMessages: async (conversationId: string) => {
+    set({ isLoading: true });
+    try {
+      const response = await conversationsApi.getMessages(conversationId);
+      set({ messages: response.data, isLoading: false });
+    } catch (error) {
+      console.error('Failed to fetch messages:', error);
+      set({ isLoading: false });
+    }
+  },
+  
+  sendMessage: async (conversationId: string, content: string) => {
+    try {
+      const response = await conversationsApi.sendMessage(conversationId, content);
+      const message = response.data;
+      
+      set((state) => ({
+        messages: [...state.messages, message],
+        conversations: state.conversations.map(conv =>
+          conv.id === conversationId
+            ? { ...conv, lastMessage: message }
+            : conv
+        ),
+      }));
+      
+      return message;
+    } catch (error) {
+      console.error('Failed to send message:', error);
+      throw error;
+    }
+  },
+  
+  createConversation: async (participantIds: string[]) => {
+    try {
+      const response = await conversationsApi.create(participantIds);
+      const conversation = response.data;
+      
+      set((state) => ({
+        conversations: [conversation, ...state.conversations],
+        activeConversation: conversation,
+      }));
+      
+      return conversation;
+    } catch (error) {
+      console.error('Failed to create conversation:', error);
+      throw error;
+    }
   },
 }));
 

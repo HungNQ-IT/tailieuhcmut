@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { Card } from '@/components/ui/card';
+import { useState, useEffect, useRef } from 'react';
+import { useAuthStore, useChatStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -9,103 +9,104 @@ import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Search, Send, Paperclip, MoreVertical, Phone, Video } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-// Mock conversations data
-const mockConversations = [
-  {
-    id: '1',
-    name: 'Nguyễn Văn B',
-    avatar: 'NB',
-    lastMessage: 'Cảm ơn bạn đã chia sẻ tài liệu!',
-    time: '5 phút',
-    unread: 2,
-    online: true,
-  },
-  {
-    id: '2',
-    name: 'Trần Thị C',
-    avatar: 'TC',
-    lastMessage: 'Bạn có tài liệu môn Cấu trúc dữ liệu không?',
-    time: '30 phút',
-    unread: 0,
-    online: false,
-  },
-  {
-    id: '3',
-    name: 'Admin',
-    avatar: 'AD',
-    lastMessage: 'Hệ thống sẽ bảo trì vào tối nay.',
-    time: '2 giờ',
-    unread: 1,
-    online: true,
-  },
-  {
-    id: '4',
-    name: 'Lê Văn D',
-    avatar: 'LD',
-    lastMessage: 'Cảm ơn!',
-    time: '1 ngày',
-    unread: 0,
-    online: false,
-  },
-];
-
-// Mock messages data
-const mockMessages = [
-  {
-    id: '1',
-    sender: 'other',
-    content: 'Chào bạn, bạn có thể giúp mình về bài tập môn Lập trình C được không?',
-    time: '10:30',
-  },
-  {
-    id: '2',
-    sender: 'me',
-    content: 'Chào bạn! Mình có thể giúp gì cho bạn?',
-    time: '10:32',
-  },
-  {
-    id: '3',
-    sender: 'other',
-    content: 'Mình đang gặp khó khăn ở bài tập con trỏ, bạn có tài liệu nào về phần này không?',
-    time: '10:35',
-  },
-  {
-    id: '4',
-    sender: 'me',
-    content: 'Có nha! Mình sẽ gửi bài giảng và bài tập mẫu cho bạn.',
-    time: '10:36',
-  },
-  {
-    id: '5',
-    sender: 'me',
-    content: '[Tài liệu: Pointer_C_Programming.pdf]',
-    time: '10:36',
-    isFile: true,
-  },
-  {
-    id: '6',
-    sender: 'other',
-    content: 'Cảm ơn bạn đã chia sẻ tài liệu!',
-    time: '10:40',
-  },
-];
+import { formatDistanceToNow } from '@/lib/utils';
+import io from 'socket.io-client';
 
 export default function MessagesPage() {
-  const [activeConversation, setActiveConversation] = useState(mockConversations[0]);
+  const { user } = useAuthStore();
+  const {
+    conversations,
+    activeConversation,
+    messages,
+    isLoading,
+    setActiveConversation,
+    fetchConversations,
+    fetchMessages,
+    sendMessage,
+    addMessage,
+  } = useChatStore();
+  
   const [newMessage, setNewMessage] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
+  const [socket, setSocket] = useState<any>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const filteredConversations = mockConversations.filter(
-    (conv) =>
-      conv.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      conv.lastMessage.toLowerCase().includes(searchQuery.toLowerCase())
+  // Initialize socket connection
+  useEffect(() => {
+    if (!user) return;
+    
+    const socketInstance = io(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001', {
+      transports: ['websocket'],
+    });
+    
+    socketInstance.on('connect', () => {
+      console.log('Socket connected');
+    });
+    
+    socketInstance.on('new-message', (message: any) => {
+      addMessage(message);
+    });
+    
+    setSocket(socketInstance);
+    
+    return () => {
+      socketInstance.disconnect();
+    };
+  }, [user]);
+
+  // Fetch conversations on mount
+  useEffect(() => {
+    if (user) {
+      fetchConversations();
+    }
+  }, [user, fetchConversations]);
+
+  // Fetch messages when conversation changes
+  useEffect(() => {
+    if (activeConversation) {
+      fetchMessages(activeConversation.id);
+      socket?.emit('join-conversation', activeConversation.id);
+    }
+  }, [activeConversation, fetchMessages, socket]);
+
+  // Scroll to bottom when messages change
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  const filteredConversations = conversations.filter(
+    (conv: any) => {
+      const otherParticipant = conv.participants.find(
+        (p: any) => p.user.id !== user?.id
+      )?.user;
+      
+      if (!otherParticipant) return false;
+      
+      return (
+        otherParticipant.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (conv.lastMessage?.content || '').toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
   );
 
-  const handleSendMessage = () => {
-    if (!newMessage.trim()) return;
-    // In a real app, this would send the message to the backend
-    setNewMessage('');
+  const handleSendMessage = async () => {
+    if (!newMessage.trim() || !activeConversation) return;
+    
+    try {
+      await sendMessage(activeConversation.id, newMessage);
+      socket?.emit('send-message', {
+        conversationId: activeConversation.id,
+        content: newMessage,
+        senderId: user?.id,
+      });
+      setNewMessage('');
+    } catch (error) {
+      console.error('Failed to send message:', error);
+    }
+  };
+
+  const getOtherParticipant = (conversation: any) => {
+    return conversation.participants.find((p: any) => p.user.id !== user?.id)?.user;
   };
 
   return (
@@ -127,49 +128,50 @@ export default function MessagesPage() {
 
         <ScrollArea className="flex-1">
           <div className="p-2 space-y-1">
-            {filteredConversations.map((conversation) => (
-              <button
-                key={conversation.id}
-                onClick={() => setActiveConversation(conversation)}
-                className={cn(
-                  'w-full flex items-center gap-3 p-3 rounded-lg transition-colors text-left',
-                  activeConversation?.id === conversation.id
-                    ? 'bg-blue-50 dark:bg-blue-900/20'
-                    : 'hover:bg-gray-100 dark:hover:bg-gray-800'
-                )}
-              >
-                <div className="relative">
-                  <Avatar>
-                    <AvatarFallback className="bg-gradient-to-br from-blue-400 to-blue-600 text-white">
-                      {conversation.avatar}
-                    </AvatarFallback>
-                  </Avatar>
-                  {conversation.online && (
-                    <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-900 rounded-full" />
+            {filteredConversations.map((conversation: any) => {
+              const otherParticipant = getOtherParticipant(conversation);
+              if (!otherParticipant) return null;
+              
+              return (
+                <button
+                  key={conversation.id}
+                  onClick={() => setActiveConversation(conversation)}
+                  className={cn(
+                    'w-full flex items-center gap-3 p-3 rounded-lg transition-colors text-left',
+                    activeConversation?.id === conversation.id
+                      ? 'bg-blue-50 dark:bg-blue-900/20'
+                      : 'hover:bg-gray-100 dark:hover:bg-gray-800'
                   )}
-                </div>
-
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between">
-                    <p className="font-medium text-gray-900 dark:text-white truncate">
-                      {conversation.name}
-                    </p>
-                    <span className="text-xs text-gray-500">{conversation.time}</span>
+                >
+                  <div className="relative">
+                    <Avatar>
+                      <AvatarFallback className="bg-gradient-to-br from-blue-400 to-blue-600 text-white">
+                        {otherParticipant.name.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
                   </div>
 
-                  <div className="flex items-center justify-between">
-                    <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
-                      {conversation.lastMessage}
-                    </p>
-                    {conversation.unread > 0 && (
-                      <Badge className="h-5 w-5 flex items-center justify-center p-0 text-xs">
-                        {conversation.unread}
-                      </Badge>
-                    )}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between">
+                      <p className="font-medium text-gray-900 dark:text-white truncate">
+                        {otherParticipant.name}
+                      </p>
+                      <span className="text-xs text-gray-500">
+                        {conversation.lastMessage
+                          ? formatDistanceToNow(new Date(conversation.lastMessage.createdAt))
+                          : ''}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
+                        {conversation.lastMessage?.content || 'Chưa có tin nhắn'}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </button>
-            ))}
+                </button>
+              );
+            })}
           </div>
         </ScrollArea>
       </div>
@@ -184,17 +186,13 @@ export default function MessagesPage() {
                 <div className="relative">
                   <Avatar>
                     <AvatarFallback className="bg-gradient-to-br from-blue-400 to-blue-600 text-white">
-                      {activeConversation.avatar}
+                      {getOtherParticipant(activeConversation)?.name.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
-                  {activeConversation.online && (
-                    <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-white dark:border-gray-900 rounded-full" />
-                  )}
                 </div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-white">{activeConversation.name}</p>
-                  <p className="text-sm text-gray-500">
-                    {activeConversation.online ? 'Đang hoạt động' : 'Không hoạt động'}
+                  <p className="font-medium text-gray-900 dark:text-white">
+                    {getOtherParticipant(activeConversation)?.name}
                   </p>
                 </div>
               </div>
@@ -215,41 +213,45 @@ export default function MessagesPage() {
             {/* Messages */}
             <ScrollArea className="flex-1 p-6">
               <div className="space-y-4">
-                {mockMessages.map((message) => (
-                  <div
-                    key={message.id}
-                    className={cn(
-                      'flex',
-                      message.sender === 'me' ? 'justify-end' : 'justify-start'
-                    )}
-                  >
-                    <div
-                      className={cn(
-                        'max-w-[70%] rounded-2xl px-4 py-2',
-                        message.sender === 'me'
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
-                      )}
-                    >
-                      {message.isFile ? (
-                        <div className="flex items-center gap-2 bg-black/10 rounded-lg p-2">
-                          <Paperclip className="w-4 h-4" />
-                          <span className="text-sm">{message.content}</span>
-                        </div>
-                      ) : (
-                        <p>{message.content}</p>
-                      )}
-                      <span
+                {isLoading ? (
+                  <div className="text-center">Đang tải tin nhắn...</div>
+                ) : (
+                  messages.map((message: any) => {
+                    const isMe = message.sender.id === user?.id;
+                    return (
+                      <div
+                        key={message.id}
                         className={cn(
-                          'text-xs mt-1 block',
-                          message.sender === 'me' ? 'text-blue-200' : 'text-gray-500'
+                          'flex',
+                          isMe ? 'justify-end' : 'justify-start'
                         )}
                       >
-                        {message.time}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+                        <div
+                          className={cn(
+                            'max-w-[70%] rounded-2xl px-4 py-2',
+                            isMe
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-white'
+                          )}
+                        >
+                          <p>{message.content}</p>
+                          <span
+                            className={cn(
+                              'text-xs mt-1 block',
+                              isMe ? 'text-blue-200' : 'text-gray-500'
+                            )}
+                          >
+                            {new Date(message.createdAt).toLocaleTimeString('vi-VN', {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
+                <div ref={messagesEndRef} />
               </div>
             </ScrollArea>
 

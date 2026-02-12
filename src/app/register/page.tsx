@@ -10,11 +10,12 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Loader2, Mail, Lock, User, Github } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Loader2, Mail, Lock, User, Github, AlertCircle } from 'lucide-react';
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { register, isLoading } = useAuthStore();
+  const { register, isLoading, error, clearError } = useAuthStore();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -64,7 +65,7 @@ export default function RegisterPage() {
       await register(formData.email, formData.password, formData.name);
       router.push('/');
     } catch (error) {
-      console.error('Register error:', error);
+      // Error is handled in store
     }
   };
 
@@ -85,6 +86,13 @@ export default function RegisterPage() {
           </CardHeader>
           
           <CardContent className="space-y-4">
+            {error && (
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="name">Họ và tên</Label>
@@ -96,7 +104,10 @@ export default function RegisterPage() {
                     placeholder="Nguyen Van A"
                     className="pl-10"
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, name: e.target.value });
+                      if (error) clearError();
+                    }}
                   />
                 </div>
                 {errors.name && (
@@ -114,7 +125,10 @@ export default function RegisterPage() {
                     placeholder="name@example.com"
                     className="pl-10"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, email: e.target.value });
+                      if (error) clearError();
+                    }}
                   />
                 </div>
                 {errors.email && (
@@ -132,7 +146,10 @@ export default function RegisterPage() {
                     placeholder="••••••••"
                     className="pl-10"
                     value={formData.password}
-                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, password: e.target.value });
+                      if (error) clearError();
+                    }}
                   />
                 </div>
                 {errors.password && (
@@ -150,7 +167,10 @@ export default function RegisterPage() {
                     placeholder="••••••••"
                     className="pl-10"
                     value={formData.confirmPassword}
-                    onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, confirmPassword: e.target.value });
+                      if (error) clearError();
+                    }}
                   />
                 </div>
                 {errors.confirmPassword && (

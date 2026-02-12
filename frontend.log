@@ -28,3 +28,818 @@ Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allow
  ✓ Compiled /subjects in 608ms (4150 modules)
  GET /downloads/ 404 in 35ms
  ✓ Compiled /login in 420ms (4168 modules)
+ GET / 200 in 258ms
+ GET / 200 in 25ms
+ ○ Compiling /subjects/[slug] ...
+ ✓ Compiled /subjects/[slug] in 1362ms (4151 modules)
+ ✓ Compiled /register in 426ms (4173 modules)
+ ✓ Compiled /messages in 332ms (4205 modules)
+ GET / 200 in 188ms
+ ✓ Compiled /favicon.ico in 362ms (2144 modules)
+ GET /favicon.ico 200 in 399ms
+ ✓ Compiled in 1307ms (4386 modules)
+ ✓ Compiled in 248ms (2156 modules)
+ ⨯ ./src/app/login/page.tsx:12:1
+Module not found: Can't resolve '@/components/ui/alert'
+[0m [90m 10 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardFooter[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m[0m
+[0m [90m 11 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 12 |[39m [36mimport[39m { [33mAlert[39m[33m,[39m [33mAlertDescription[39m } [36mfrom[39m [32m'@/components/ui/alert'[39m[33m;[39m[0m
+[0m [90m    |[39m [31m[1m^[22m[39m[0m
+[0m [90m 13 |[39m [36mimport[39m { [33mLoader2[39m[33m,[39m [33mMail[39m[33m,[39m [33mLock[39m[33m,[39m [33mGithub[39m[33m,[39m [33mAlertCircle[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m 14 |[39m[0m
+[0m [90m 15 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mLoginPage[39m() {[0m
+
+https://nextjs.org/docs/messages/module-not-found
+ ⨯ ./src/app/login/page.tsx:12:1
+Module not found: Can't resolve '@/components/ui/alert'
+[0m [90m 10 |[39m [36mimport[39m { [33mCard[39m[33m,[39m [33mCardContent[39m[33m,[39m [33mCardDescription[39m[33m,[39m [33mCardFooter[39m[33m,[39m [33mCardHeader[39m[33m,[39m [33mCardTitle[39m } [36mfrom[39m [32m'@/components/ui/card'[39m[33m;[39m[0m
+[0m [90m 11 |[39m [36mimport[39m { [33mSeparator[39m } [36mfrom[39m [32m'@/components/ui/separator'[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 12 |[39m [36mimport[39m { [33mAlert[39m[33m,[39m [33mAlertDescription[39m } [36mfrom[39m [32m'@/components/ui/alert'[39m[33m;[39m[0m
+[0m [90m    |[39m [31m[1m^[22m[39m[0m
+[0m [90m 13 |[39m [36mimport[39m { [33mLoader2[39m[33m,[39m [33mMail[39m[33m,[39m [33mLock[39m[33m,[39m [33mGithub[39m[33m,[39m [33mAlertCircle[39m } [36mfrom[39m [32m'lucide-react'[39m[33m;[39m[0m
+[0m [90m 14 |[39m[0m
+[0m [90m 15 |[39m [36mexport[39m [36mdefault[39m [36mfunction[39m [33mLoginPage[39m() {[0m
+
+https://nextjs.org/docs/messages/module-not-found
+ ✓ Compiled in 704ms (4402 modules)
+ ⚠ ./src/app/messages/page.tsx
+Attempted import error: 'formatDistanceToNow' is not exported from '@/lib/utils' (imported as 'formatDistanceToNow').
+
+Import trace for requested module:
+./src/app/messages/page.tsx
+
+./src/app/messages/page.tsx
+Attempted import error: 'formatDistanceToNow' is not exported from '@/lib/utils' (imported as 'formatDistanceToNow').
+
+Import trace for requested module:
+./src/app/messages/page.tsx
+ ⨯ ./src/lib/utils.ts:3:1
+Module not found: Can't resolve 'date-fns'
+[0m [90m 1 |[39m [36mimport[39m { clsx[33m,[39m type [33mClassValue[39m } [36mfrom[39m [32m"clsx"[39m[0m
+[0m [90m 2 |[39m [36mimport[39m { twMerge } [36mfrom[39m [32m"tailwind-merge"[39m[0m
+[0m[31m[1m>[22m[39m[90m 3 |[39m [36mimport[39m { formatDistanceToNow [36mas[39m dateFnsFormatDistanceToNow } [36mfrom[39m [32m'date-fns'[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 4 |[39m [36mimport[39m { vi } [36mfrom[39m [32m'date-fns/locale'[39m[0m
+[0m [90m 5 |[39m[0m
+[0m [90m 6 |[39m [36mexport[39m [36mfunction[39m cn([33m...[39minputs[33m:[39m [33mClassValue[39m[]) {[0m
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./src/app/page.tsx
+ ✓ Compiled in 1239ms (5598 modules)
+ ✓ Compiled in 187ms (2743 modules)
+ ✓ Compiled in 795ms (5596 modules)
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1632ms (5585 modules)
+ ⨯ Error: Cannot find module './948.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:1:11537
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:1:11594)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ ⨯ Error: Cannot find module './948.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:1:11537
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:1:11594)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ ○ Compiling /_error ...
+ ✓ Compiled /_error in 526ms (5811 modules)
+ GET /_next/static/webpack/525de1a9f77fd380.webpack.hot-update.json 404 in 2376ms
+ GET /_next/static/webpack/525de1a9f77fd380.webpack.hot-update.json 404 in 2370ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⨯ Error: Cannot find module './vendor-chunks/axios.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:498:47
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:501:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ ⨯ Error: Cannot find module './vendor-chunks/axios.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:498:47
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:501:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⨯ Error: Cannot find module './vendor-chunks/axios.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:498:47
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:501:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ ⨯ Error: Cannot find module './vendor-chunks/axios.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:498:47
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:501:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ ⨯ Error: Cannot find module './vendor-chunks/axios.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:498:47
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:501:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ GET / 500 in 4ms
+ ⨯ Error: Cannot find module './vendor-chunks/axios.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:498:47
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:501:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ GET / 500 in 6ms
+ ⨯ Error: Cannot find module './vendor-chunks/axios.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:498:47
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:501:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ ⨯ Error: Cannot find module './vendor-chunks/axios.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:498:47
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:501:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ GET / 500 in 8ms
+ GET / 500 in 7ms
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/vendor-chunks/@radix-ui.js'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/@radix-ui' in /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server for build dependencies doesn't lead to expected result '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/vendor-chunks/@radix-ui.js', but to 'Error: Can't resolve './vendor-chunks/@radix-ui' in '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/@radix-ui (expected /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/vendor-chunks/@radix-ui.js)
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_error.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_error.js
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at resolve commonjs /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving './vendor-chunks/lucide-react' in /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server for build dependencies doesn't lead to expected result '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/vendor-chunks/lucide-react.js', but to 'Error: Can't resolve './vendor-chunks/lucide-react' in '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ./vendor-chunks/lucide-react (expected /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/vendor-chunks/lucide-react.js)
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_error.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_error.js
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+<w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+<w>  at resolve commonjs /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js

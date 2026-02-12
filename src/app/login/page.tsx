@@ -9,11 +9,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Loader2, Mail, Lock, Github } from 'lucide-react';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Loader2, Mail, Lock, Github, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { login, isLoading } = useAuthStore();
+  const { login, isLoading, error, clearError } = useAuthStore();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -48,7 +49,7 @@ export default function LoginPage() {
       await login(formData.email, formData.password);
       router.push('/');
     } catch (error) {
-      console.error('Login error:', error);
+      // Error is handled in store
     }
   };
 
@@ -69,6 +70,13 @@ export default function LoginPage() {
           </CardHeader>
           
           <CardContent className="space-y-4">
+            {error && (
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+            
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
@@ -80,7 +88,10 @@ export default function LoginPage() {
                     placeholder="name@example.com"
                     className="pl-10"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, email: e.target.value });
+                      if (error) clearError();
+                    }}
                   />
                 </div>
                 {errors.email && (
@@ -106,7 +117,10 @@ export default function LoginPage() {
                     placeholder="••••••••"
                     className="pl-10"
                     value={formData.password}
-                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, password: e.target.value });
+                      if (error) clearError();
+                    }}
                   />
                 </div>
                 {errors.password && (
