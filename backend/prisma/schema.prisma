@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  avatar    String?
+  role      String   @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  messages     Message[]
+  conversations ConversationParticipant[]
+  documents    Document[]
+  bookmarks    Bookmark[]
+
+  @@map("users")
+}
+
+model Subject {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  category    String
+  description String
+  icon        String
+  color       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  chapters  Chapter[]
+  documents Document[]
+
+  @@map("subjects")
+}
+
+model Chapter {
+  id       String @id @default(cuid())
+  title    String
+  order    Int
+  subjectId String
+
+  subject   Subject    @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  documents Document[]
+
+  @@map("chapters")
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  title       String
+  type        String
+  url         String
+  size        String?
+  downloads   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  subjectId   String
+  chapterId   String?
+  uploadedById String
+
+  subject    Subject    @relation(fields: [subjectId], references: [id])
+  chapter    Chapter?   @relation(fields: [chapterId], references: [id])
+  uploadedBy User       @relation(fields: [uploadedById], references: [id])
+  bookmarks  Bookmark[]
+
+  @@map("documents")
+}
+
+model Conversation {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  participants ConversationParticipant[]
+  messages     Message[]
+
+  @@map("conversations")
+}
+
+model ConversationParticipant {
+  id             String @id @default(cuid())
+  conversationId String
+  userId         String
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([conversationId, userId])
+  @@map("conversation_participants")
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  content        String
+  createdAt      DateTime @default(now())
+  conversationId String
+  senderId       String
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User         @relation(fields: [senderId], references: [id])
+
+  @@map("messages")
+}
+
+model Bookmark {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  userId     String
+  documentId String
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, documentId])
+  @@map("bookmarks")
+}

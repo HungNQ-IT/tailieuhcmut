@@ -1,101 +1,198 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState, useRef } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { csSubjects, generalSubjects } from '@/constants/subjects';
+import * as Icons from 'lucide-react';
+import { BookOpen, Users, FileText, ArrowRight, ChevronDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+export default function HomePage() {
+  const [showSubjects, setShowSubjects] = useState(false);
+  const subjectsRef = useRef<HTMLDivElement>(null);
+
+  const scrollToSubjects = () => {
+    setShowSubjects(true);
+    subjectsRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const stats = [
+    { icon: BookOpen, label: 'Môn học', value: '17+' },
+    { icon: FileText, label: 'Tài liệu', value: '500+' },
+    { icon: Users, label: 'Sinh viên', value: '1000+' },
+  ];
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-bl from-blue-100/50 to-transparent rounded-full blur-3xl" />
+          <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-cyan-100/50 to-transparent rounded-full blur-3xl" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <div className="relative max-w-4xl mx-auto text-center">
+          <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm">
+            🎓 Dành cho sinh viên HCMUT
+          </Badge>
+
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+            Tài Liệu{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
+              Bách Khoa
+            </span>
+            <br />
+            CS Hub
+          </h1>
+
+          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+            Kho tài liệu Computer Science và môn đại cương chất lượng cao,
+            được biên soạn dành riêng cho sinh viên Trường Đại học Bách Khoa TP.HCM
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+            <Button
+              size="lg"
+              className="w-full sm:w-auto text-lg px-8 py-6 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600"
+              onClick={scrollToSubjects}
+            >
+              🚀 Bắt đầu học
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto text-lg px-8 py-6"
+              asChild
+            >
+              <Link href="/subjects">
+                Xem tất cả môn học
+              </Link>
+            </Button>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-8 max-w-lg mx-auto">
+            {stats.map((stat) => {
+              const Icon = stat.icon;
+              return (
+                <div key={stat.label} className="text-center">
+                  <div className="flex justify-center mb-2">
+                    <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                      <Icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                    </div>
+                  </div>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Scroll Indicator */}
+          <button
+            onClick={scrollToSubjects}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+          >
+            <ChevronDown className="w-8 h-8 text-gray-400" />
+          </button>
+        </div>
+      </section>
+
+      {/* Subjects Section */}
+      <section
+        ref={subjectsRef}
+        className={cn(
+          'py-20 px-4 sm:px-6 lg:px-8 transition-all duration-500',
+          showSubjects ? 'opacity-100' : 'opacity-0'
+        )}
+      >
+        <div className="max-w-7xl mx-auto">
+          {/* CS Subjects */}
+          <div className="mb-16">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-1 h-8 bg-blue-600 rounded-full" />
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+                Computer Science
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {csSubjects.map((subject) => {
+                const Icon = (Icons as any)[subject.icon] || Icons.BookOpen;
+                return (
+                  <Link
+                    key={subject.id}
+                    href={`/subjects/${subject.slug}`}
+                    className="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className={cn(
+                        'w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0',
+                        subject.color
+                      )}>
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-gray-900 dark:text-white mb-1 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                          {subject.name}
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                          {subject.description}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* General Subjects */}
+          <div>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-1 h-8 bg-green-600 rounded-full" />
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
+                Môn đại cương
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {generalSubjects.map((subject) => {
+                const Icon = (Icons as any)[subject.icon] || Icons.BookOpen;
+                return (
+                  <Link
+                    key={subject.id}
+                    href={`/subjects/${subject.slug}`}
+                    className="group bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-700"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className={cn(
+                        'w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0',
+                        subject.color
+                      )}>
+                        <Icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-gray-900 dark:text-white mb-1 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
+                          {subject.name}
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+                          {subject.description}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
