@@ -23,7 +23,7 @@ class SupabaseRealtimeService {
           table: 'messages',
           filter: `conversation_id=eq.${conversationId}`,
         },
-        async (payload) => {
+        async (payload: any) => {
           // Fetch full message with profile
           const { data, error } = await supabase
             .from('messages')
@@ -94,7 +94,7 @@ class SupabaseRealtimeService {
           schema: 'public',
           table: 'conversations',
         },
-        async (payload) => {
+        async (payload: any) => {
           if (payload.eventType === 'INSERT') {
             // New conversation created
             const { data, error } = await supabase
@@ -146,7 +146,7 @@ class SupabaseRealtimeService {
           schema: 'public',
           table: 'conversations',
         },
-        async (payload) => {
+        async (payload: any) => {
           // Conversation updated (likely last_message changed)
           const { data, error } = await supabase
             .from('conversations')
