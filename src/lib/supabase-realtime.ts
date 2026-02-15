@@ -190,7 +190,7 @@ class SupabaseRealtimeService {
               id: lastMsg.id,
               content: lastMsg.content,
               conversationId: data.id,
-              sender: participants.find((p) => p.id === lastMsg.sender_id) || participants[0],
+              sender: participants.find((p: any) => p.id === lastMsg.sender_id) || participants[0],
               createdAt: new Date(lastMsg.created_at),
             } : undefined;
 
