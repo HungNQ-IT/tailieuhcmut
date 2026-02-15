@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { useAuthStore } from '@/lib/store';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
 import {
   User,
   Mail,
@@ -18,10 +20,70 @@ import {
   Bookmark,
   Edit3,
   Camera,
+  Save,
+  X,
 } from 'lucide-react';
 
 export default function ProfilePage() {
-  const { user } = useAuthStore();
+  const { user, setUser } = useAuthStore();
+  const [isEditing, setIsEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    name: user?.name || '',
+    studentId: '',
+    major: '',
+  });
+  const [isSaving, setIsSaving] = useState(false);
+
+  // Load saved profile data from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('userProfile');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setFormData(prev => ({
+        ...prev,
+        studentId: parsed.studentId || '',
+        major: parsed.major || '',
+      }));
+    }
+  }, []);
+
+  const handleEdit = () => {
+    setFormData({
+      name: user?.name || '',
+      studentId: formData.studentId,
+      major: formData.major,
+    });
+    setIsEditing(true);
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+  };
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    
+    // Save to localStorage (in production, save to Supabase)
+    localStorage.setItem('userProfile', JSON.stringify({
+      studentId: formData.studentId,
+      major: formData.major,
+    }));
+
+    // Update user name in store if changed
+    if (formData.name !== user?.name) {
+      setUser({ ...user!, name: formData.name });
+    }
+
+    // Show success message
+    alert('Đã cập nhật thông tin hồ sơ thành công!');
+    
+    setIsSaving(false);
+    setIsEditing(false);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
@@ -55,10 +117,19 @@ export default function ProfilePage() {
               </div>
             </div>
 
-            <Button className="md:self-start">
-              <Edit3 className="w-4 h-4 mr-2" />
-              Chỉnh sửa hồ sơ
-            </Button>
+            {!isEditing ? (
+              <Button className="md:self-start" onClick={handleEdit}>
+                <Edit3 className="w-4 h-4 mr-2" />
+                Chỉnh sửa hồ sơ
+              </Button>
+            ) : (
+              <div className="flex gap-2 md:self-start">
+                <Button variant="outline" onClick={handleCancel}>
+                  <X className="w-4 h-4 mr-2" />
+                  Hủy
+                </Button>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
@@ -123,8 +194,11 @@ export default function ProfilePage() {
                     <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                     <Input
                       id="fullName"
-                      defaultValue={user?.name || 'Nguyen Van A'}
+                      name="name"
+                      value={isEditing ? formData.name : (user?.name || 'User')}
+                      onChange={handleChange}
                       className="pl-10"
+                      disabled={!isEditing}
                     />
                   </div>
                 </div>
@@ -136,7 +210,7 @@ export default function ProfilePage() {
                     <Input
                       id="email"
                       type="email"
-                      defaultValue={user?.email || 'user@example.com'}
+                      value={user?.email || ''}
                       className="pl-10"
                       disabled
                     />
@@ -145,20 +219,39 @@ export default function ProfilePage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="studentId">Mã sinh viên</Label>
-                  <Input id="studentId" placeholder="Nhập mã sinh viên" />
+                  <Input 
+                    id="studentId"
+                    name="studentId"
+                    placeholder="Nhập mã sinh viên"
+                    value={formData.studentId}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                  />
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="major">Ngành học</Label>
-                  <Input id="major" placeholder="Nhập ngành học" />
+                  <Input 
+                    id="major"
+                    name="major"
+                    placeholder="Nhập ngành học"
+                    value={formData.major}
+                    onChange={handleChange}
+                    disabled={!isEditing}
+                  />
                 </div>
               </div>
 
               <Separator />
 
-              <div className="flex justify-end">
-                <Button>Lưu thay đổi</Button>
-              </div>
+              {isEditing && (
+                <div className="flex justify-end">
+                  <Button onClick={handleSave} disabled={isSaving}>
+                    <Save className="w-4 h-4 mr-2" />
+                    {isSaving ? 'Đang lưu...' : 'Lưu thay đổi'}
+                  </Button>
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>

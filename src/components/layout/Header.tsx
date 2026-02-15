@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { useAuthStore, useUIStore, useNotificationStore } from '@/lib/store';
+import { useAuthStore, useUIStore, useNotificationStore, useChatStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -27,7 +27,8 @@ import {
 export default function Header() {
   const { user, logout } = useAuthStore();
   const { setSidebarOpen } = useUIStore();
-  const { unreadCount } = useNotificationStore();
+  const { unreadCount: notificationCount } = useNotificationStore();
+  const { unreadCount: messageCount } = useChatStore();
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
@@ -65,9 +66,11 @@ export default function Header() {
               <Button variant="ghost" size="icon" className="relative" asChild>
                 <Link href="/messages">
                   <MessageSquare className="w-5 h-5" />
-                  <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs">
-                    2
-                  </Badge>
+                  {messageCount > 0 && (
+                    <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-blue-500">
+                      {messageCount}
+                    </Badge>
+                  )}
                 </Link>
               </Button>
 
@@ -76,9 +79,9 @@ export default function Header() {
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" size="icon" className="relative">
                     <Bell className="w-5 h-5" />
-                    {unreadCount > 0 && (
+                    {notificationCount > 0 && (
                       <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-red-500">
-                        {unreadCount}
+                        {notificationCount}
                       </Badge>
                     )}
                   </Button>
@@ -98,7 +101,9 @@ export default function Header() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="ghost" className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white text-sm font-bold">
+                      {user.name?.charAt(0).toUpperCase() || 'U'}
+                    </div>
                     <span className="hidden sm:inline text-sm font-medium">{user.name}</span>
                     <ChevronDown className="w-4 h-4" />
                   </Button>

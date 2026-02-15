@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useUIStore } from '@/lib/store';
+import { useUIStore, useAuthStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import {
   BookOpen,
@@ -31,6 +31,7 @@ export default function Sidebar() {
   const [isHovered, setIsHovered] = useState(false);
   const pathname = usePathname();
   const { sidebarOpen, setSidebarOpen } = useUIStore();
+  const { user } = useAuthStore();
 
   const isExpanded = isHovered || sidebarOpen;
 
@@ -123,18 +124,22 @@ export default function Sidebar() {
 
         {/* Bottom Section */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 dark:border-gray-800">
-          <div
-            className={cn(
-              'flex items-center gap-3 transition-all duration-300',
-              isExpanded ? 'opacity-100' : 'opacity-0 lg:opacity-0'
-            )}
-          >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex-shrink-0" />
-            <div className="overflow-hidden">
-              <p className="text-sm font-medium text-gray-900 dark:text-white truncate">Nguyen Van A</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400 truncate">Sinh viên</p>
+          <Link href="/profile">
+            <div
+              className={cn(
+                'flex items-center gap-3 transition-all duration-300 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg p-2 -m-2',
+                isExpanded ? 'opacity-100' : 'opacity-0 lg:opacity-0'
+              )}
+            >
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex-shrink-0 flex items-center justify-center text-white text-sm font-bold">
+                {user?.name?.charAt(0).toUpperCase() || 'U'}
+              </div>
+              <div className="overflow-hidden">
+                <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{user?.name || 'User'}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user?.role === 'admin' ? 'Admin' : 'Sinh viên'}</p>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </aside>
     </>
