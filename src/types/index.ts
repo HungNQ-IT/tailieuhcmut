@@ -19,13 +19,6 @@ export interface Subject {
   documentCount: number;
 }
 
-export interface Chapter {
-  id: string;
-  title: string;
-  order: number;
-  documents: Document[];
-}
-
 export interface Document {
   id: string;
   title: string;
@@ -68,5 +61,62 @@ export interface Notification {
   content: string;
   type: 'message' | 'system' | 'document';
   read: boolean;
+  createdAt: Date;
+}
+
+// Exercise Types
+export interface Exercise {
+  id: string;
+  slug: string;
+  subjectSlug: string;
+  chapterNumber: number;
+  exerciseNumber: number;
+  title: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  content: string;
+  solution?: string;
+  hints: string[];
+  tags: string[];
+  points: number;
+  timeLimit?: number;
+  createdAt: Date;
+}
+
+export interface Chapter {
+  id: string;
+  subjectSlug: string;
+  chapterNumber: number;
+  title: string;
+  description?: string;
+  estimatedTime?: number;
+  orderIndex?: number;
+  documents?: Document[];
+}
+
+export interface UserProgress {
+  id: string;
+  userId: string;
+  exerciseId: string;
+  status: 'not_started' | 'in_progress' | 'completed' | 'abandoned';
+  attempts: number;
+  score?: number;
+  startedAt?: Date;
+  completedAt?: Date;
+  timeSpent?: number;
+}
+
+export interface ExerciseSubmission {
+  id: string;
+  userId: string;
+  exerciseId: string;
+  content: string;
+  language?: string;
+  isCorrect?: boolean;
+  score?: number;
+  feedback?: string;
+  executionTime?: number;
+  memoryUsed?: number;
+  testCasesPassed?: number;
+  testCasesTotal?: number;
   createdAt: Date;
 }

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { supabase } from '@/lib/supabase';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
 
@@ -9,28 +10,16 @@ export const api = axios.create({
   },
 });
 
-// Add auth token to requests
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+// Add Supabase auth token to requests (for backend routes that still need it)
+api.interceptors.request.use(async (config) => {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session?.access_token) {
+    config.headers.Authorization = `Bearer ${session.access_token}`;
   }
   return config;
 });
 
-// Auth API
-export const authApi = {
-  register: (email: string, password: string, name: string) =>
-    api.post('/auth/register', { email, password, name }),
-  
-  login: (email: string, password: string) =>
-    api.post('/auth/login', { email, password }),
-  
-  getMe: () =>
-    api.get('/auth/me'),
-};
-
-// Users API
+// Users API (still uses backend for now)
 export const usersApi = {
   getAll: () => api.get('/users'),
   getById: (id: string) => api.get(`/users/${id}`),
@@ -38,24 +27,13 @@ export const usersApi = {
     api.patch(`/users/${id}`, data),
 };
 
-// Conversations API
-export const conversationsApi = {
-  getAll: () => api.get('/messages/conversations'),
-  getMessages: (conversationId: string) =>
-    api.get(`/messages/conversations/${conversationId}/messages`),
-  create: (participantIds: string[]) =>
-    api.post('/messages/conversations', { participantIds }),
-  sendMessage: (conversationId: string, content: string) =>
-    api.post(`/messages/conversations/${conversationId}/messages`, { content }),
-};
-
-// Subjects API
+// Subjects API (still uses backend)
 export const subjectsApi = {
   getAll: () => api.get('/subjects'),
   getBySlug: (slug: string) => api.get(`/subjects/${slug}`),
 };
 
-// Documents API
+// Documents API (still uses backend)
 export const documentsApi = {
   getAll: (params?: { subjectId?: string; chapterId?: string }) => api.get('/documents', { params }),
   getById: (id: string) => api.get(`/documents/${id}`),

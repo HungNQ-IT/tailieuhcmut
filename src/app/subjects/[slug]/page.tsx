@@ -134,6 +134,7 @@ export default function SubjectDetailPage() {
         <TabsList className="mb-6">
           <TabsTrigger value="chapters">Danh sách chương</TabsTrigger>
           <TabsTrigger value="documents">Tài liệu</TabsTrigger>
+          <TabsTrigger value="exercises">Bài tập</TabsTrigger>
           <TabsTrigger value="info">Thông tin môn học</TabsTrigger>
         </TabsList>
 
@@ -247,6 +248,23 @@ export default function SubjectDetailPage() {
                   <li>Đề thi các năm trước</li>
                 </ul>
               </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="exercises">
+          <Card>
+            <CardHeader>
+              <CardTitle>Bài tập</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-gray-600 dark:text-gray-400">
+                Luyện tập với các bài tập từ cơ bản đến nâng cao.
+              </p>
+              <Button onClick={() => window.location.href = `/subjects/${slug}/exercises`}>
+                <BookOpen className="w-4 h-4 mr-2" />
+                Xem tất cả bài tập
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>

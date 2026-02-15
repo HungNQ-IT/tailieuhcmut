@@ -843,3 +843,113 @@ Require stack:
 <w>  at file dependencies /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
 <w>  at file /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
 <w>  at resolve commonjs /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js
+ ⨯ Error: Cannot find module './vendor-chunks/axios.js'
+Require stack:
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js
+- /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1420:15)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1058:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1063:22)
+    at Module._load (node:internal/modules/cjs/loader:1226:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at __webpack_require__.f.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:203:28)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:111:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:110:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js:162:22)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:498:47
+    at Object.<anonymous> (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/app/page.js:501:3)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1503:12)
+    at mod.require (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16)
+    at requirePage (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js:109:84)
+    at /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:84
+    at async loadComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js:103:26)
+    at async DevServer.findPageComponentsImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:714:36)
+    at async DevServer.findPageComponents (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:577:20)
+    at async DevServer.renderPageComponent (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/base-server.js:818:17)
+    at async /Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:179:21)
+    at async handleRequest (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:359:24)
+    at async requestHandlerImpl (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js:383:13)
+    at async Server.requestListener (/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/webpack-runtime.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/.next/server/pages/_document.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/require.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/load-components.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/build/utils.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-middleware.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/dev/hot-reloader-webpack.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-utils/setup-dev-bundler.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/router-server.js',
+    '/Users/nguyenquochung/Downloads/Tài liệu CS/cs-hub/node_modules/next/dist/server/lib/start-server.js'
+  ],
+  page: '/'
+}
+ GET / 500 in 35ms
+ ✓ Compiled in 2.4s (5827 modules)
+   Reload env: .env.local
+ ✓ Compiled in 4.1s (5840 modules)
+ ✓ Compiled in 691ms (5742 modules)
+ ✓ Compiled in 253ms (5756 modules)
+ ✓ Compiled in 967ms (5761 modules)
+ ✓ Compiled in 567ms (5761 modules)
+ ✓ Compiled in 798ms (5658 modules)
+ ✓ Compiled in 247ms (2898 modules)
+ ✓ Compiled in 587ms (2898 modules)
+ ✓ Compiled in 162ms (2898 modules)
+ ✓ Compiled in 634ms (2898 modules)
+ ✓ Compiled in 662ms (5663 modules)
+ ✓ Compiled in 1088ms (5646 modules)
+ ✓ Compiled in 255ms (2899 modules)
+ ✓ Compiled in 574ms (5660 modules)
+ ✓ Compiled in 816ms (5660 modules)
+ ✓ Compiled in 311ms (2899 modules)
+ ✓ Compiled in 153ms (2899 modules)
+ ✓ Compiled in 161ms (2899 modules)
+ ✓ Compiled in 263ms (2899 modules)
+ ✓ Compiled in 483ms (2899 modules)
+ ✓ Compiled in 329ms (2899 modules)
+ ✓ Compiled in 150ms (2899 modules)
+ ✓ Compiled in 165ms (2899 modules)
+ ✓ Compiled in 280ms (2899 modules)
+ ✓ Compiled in 145ms (2899 modules)
+ ✓ Compiled in 245ms (2899 modules)
+ ✓ Compiled in 458ms (2899 modules)
+ ✓ Compiled in 513ms (2899 modules)
+ ✓ Compiled in 341ms (2899 modules)
+ ✓ Compiled in 663ms (5646 modules)
+ ✓ Compiled in 532ms (5646 modules)
+ ✓ Compiled in 475ms (5646 modules)
+ ✓ Compiled in 596ms (5646 modules)
+ ✓ Compiled in 583ms (5646 modules)
+ ✓ Compiled in 888ms (5646 modules)
+ ✓ Compiled in 535ms (5646 modules)

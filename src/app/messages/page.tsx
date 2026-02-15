@@ -5,12 +5,12 @@ import { useAuthStore, useChatStore } from '@/lib/store';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Search, Send, Paperclip, MoreVertical, Phone, Video } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { formatDistanceToNow } from '@/lib/utils';
-import io from 'socket.io-client';
+import { realtimeService } from '@/lib/supabase-realtime';
+import { Message } from '@/types';
 
 export default function MessagesPage() {
   const { user } = useAuthStore();
@@ -24,35 +24,58 @@ export default function MessagesPage() {
     fetchMessages,
     sendMessage,
     addMessage,
+    setConversations,
   } = useChatStore();
   
   const [newMessage, setNewMessage] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [socket, setSocket] = useState<any>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Initialize socket connection
+  // Setup Supabase Realtime subscriptions
   useEffect(() => {
     if (!user) return;
-    
-    const socketInstance = io(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001', {
-      transports: ['websocket'],
-    });
-    
-    socketInstance.on('connect', () => {
-      console.log('Socket connected');
-    });
-    
-    socketInstance.on('new-message', (message: any) => {
-      addMessage(message);
-    });
-    
-    setSocket(socketInstance);
-    
+
+    // Subscribe to conversation updates (new conversations, last message changes)
+    realtimeService.subscribeToConversations(
+      user.id,
+      (updatedConversation) => {
+        // Update existing conversation
+        setConversations(
+          conversations.map((conv) =>
+            conv.id === updatedConversation.id ? updatedConversation : conv
+          )
+        );
+      },
+      (newConversation) => {
+        // Add new conversation
+        setConversations([newConversation, ...conversations]);
+      }
+    );
+
     return () => {
-      socketInstance.disconnect();
+      realtimeService.cleanup();
     };
-  }, [user]);
+  }, [user, conversations, setConversations]);
+
+  // Subscribe to messages when active conversation changes
+  useEffect(() => {
+    if (!activeConversation || !user) return;
+
+    // Subscribe to new messages in this conversation
+    realtimeService.subscribeToMessages(
+      activeConversation.id,
+      (message: Message) => {
+        // Only add message if it's not from current user (avoid duplicates)
+        if (message.sender.id !== user.id) {
+          addMessage(message);
+        }
+      }
+    );
+
+    return () => {
+      realtimeService.unsubscribeFromMessages(activeConversation.id);
+    };
+  }, [activeConversation, user, addMessage]);
 
   // Fetch conversations on mount
   useEffect(() => {
@@ -65,9 +88,8 @@ export default function MessagesPage() {
   useEffect(() => {
     if (activeConversation) {
       fetchMessages(activeConversation.id);
-      socket?.emit('join-conversation', activeConversation.id);
     }
-  }, [activeConversation, fetchMessages, socket]);
+  }, [activeConversation, fetchMessages]);
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -77,8 +99,8 @@ export default function MessagesPage() {
   const filteredConversations = conversations.filter(
     (conv: any) => {
       const otherParticipant = conv.participants.find(
-        (p: any) => p.user.id !== user?.id
-      )?.user;
+        (p: any) => p.id !== user?.id
+      );
       
       if (!otherParticipant) return false;
       
@@ -94,11 +116,6 @@ export default function MessagesPage() {
     
     try {
       await sendMessage(activeConversation.id, newMessage);
-      socket?.emit('send-message', {
-        conversationId: activeConversation.id,
-        content: newMessage,
-        senderId: user?.id,
-      });
       setNewMessage('');
     } catch (error) {
       console.error('Failed to send message:', error);
@@ -106,7 +123,7 @@ export default function MessagesPage() {
   };
 
   const getOtherParticipant = (conversation: any) => {
-    return conversation.participants.find((p: any) => p.user.id !== user?.id)?.user;
+    return conversation.participants.find((p: any) => p.id !== user?.id);
   };
 
   return (
