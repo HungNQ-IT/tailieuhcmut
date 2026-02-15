@@ -1,32 +1,15 @@
 import { createBrowserClient } from '@supabase/ssr';
 
-let supabaseInstance: ReturnType<typeof createBrowserClient> | null = null;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-export function getSupabaseClient() {
-  if (typeof window === 'undefined') {
-    // Server-side: return mock client
-    return null;
-  }
-  
-  if (!supabaseInstance) {
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-    
-    if (!supabaseUrl || !supabaseAnonKey) {
-      console.warn('⚠️  Supabase environment variables are missing!');
-      return null;
-    }
-    
-    try {
-      supabaseInstance = createBrowserClient(supabaseUrl, supabaseAnonKey);
-    } catch (error) {
-      console.error('Failed to create Supabase client:', error);
-      return null;
-    }
-  }
-  
-  return supabaseInstance;
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('❌ Supabase environment variables are missing!');
+  console.error('NEXT_PUBLIC_SUPABASE_URL:', supabaseUrl ? 'Set' : 'Missing');
+  console.error('NEXT_PUBLIC_SUPABASE_ANON_KEY:', supabaseAnonKey ? 'Set' : 'Missing');
 }
 
-// Export for backward compatibility
-export const supabase = getSupabaseClient();
+export const supabase = createBrowserClient(
+  supabaseUrl || '',
+  supabaseAnonKey || ''
+);
