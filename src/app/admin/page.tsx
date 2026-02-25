@@ -1,284 +1,398 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { FormEvent, useEffect, useMemo, useState } from 'react';
+import { AlertCircle, CheckCircle2, RefreshCw, Upload } from 'lucide-react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useAuthStore } from '@/lib/store';
-// import { redirect } from 'next/navigation';
-import {
-  Users,
-  BookOpen,
-  FileText,
-  MessageSquare,
-  TrendingUp,
-  TrendingDown,
-  MoreVertical,
-  Plus,
-} from 'lucide-react';
+import { Textarea } from '@/components/ui/textarea';
 
-// Mock stats data
-const stats = [
-  {
-    title: 'Tổng ngườ dùng',
-    value: '1,234',
-    change: '+12%',
-    trend: 'up',
-    icon: Users,
-    color: 'bg-blue-500',
-  },
-  {
-    title: 'Môn học',
-    value: '17',
-    change: '+2',
-    trend: 'up',
-    icon: BookOpen,
-    color: 'bg-green-500',
-  },
-  {
-    title: 'Tài liệu',
-    value: '456',
-    change: '+28',
-    trend: 'up',
-    icon: FileText,
-    color: 'bg-purple-500',
-  },
-  {
-    title: 'Tin nhắn',
-    value: '89',
-    change: '-5%',
-    trend: 'down',
-    icon: MessageSquare,
-    color: 'bg-orange-500',
-  },
-];
+type Difficulty = 'easy' | 'medium' | 'hard';
 
-// Mock recent users
-const recentUsers = [
-  { id: 1, name: 'Nguyễn Văn A', email: 'nguyenvana@example.com', role: 'user', joined: '2 giờ trước' },
-  { id: 2, name: 'Trần Thị B', email: 'tranthib@example.com', role: 'user', joined: '5 giờ trước' },
-  { id: 3, name: 'Lê Văn C', email: 'levanc@example.com', role: 'admin', joined: '1 ngày trước' },
-  { id: 4, name: 'Phạm Thị D', email: 'phamthid@example.com', role: 'user', joined: '2 ngày trước' },
-];
+interface ApiError {
+  error?: string;
+  details?: string;
+  stdout?: string;
+}
 
-// Mock recent documents
-const recentDocuments = [
-  { id: 1, title: 'Slide Giải tích 1 - Chương 1', subject: 'Giải tích', size: '2.5 MB', uploaded: '1 giờ trước' },
-  { id: 2, title: 'Bài tập CTDL - Tuần 3', subject: 'Cấu trúc dữ liệu', size: '1.2 MB', uploaded: '3 giờ trước' },
-  { id: 3, title: 'Đề thi Hệ điều hành 2023', subject: 'Hệ điều hành', size: '500 KB', uploaded: '5 giờ trước' },
-];
+const initialProblemTemplate = `# Đề bài
 
-// Mock support tickets
-const supportTickets = [
-  { id: 1, title: 'Không tải được tài liệu', user: 'Nguyễn Văn A', status: 'open', created: '30 phút trước' },
-  { id: 2, title: 'Yêu cầu thêm môn học', user: 'Trần Thị B', status: 'pending', created: '2 giờ trước' },
-  { id: 3, title: 'Báo lỗi đăng nhập', user: 'Lê Văn C', status: 'resolved', created: '1 ngày trước' },
-];
+Mô tả yêu cầu bài tập.
+
+## Input
+
+[Mô tả input]
+
+## Output
+
+[Mô tả output]
+
+## Ví dụ
+
+\`\`\`
+Input:
+
+Output:
+\`\`\`
+`;
 
 export default function AdminPage() {
-  const { user } = useAuthStore();
+  const [subjectInput, setSubjectInput] = useState('');
+  const [knownSubjects, setKnownSubjects] = useState<string[]>([]);
+  const [chapter, setChapter] = useState(1);
+  const [exercise, setExercise] = useState(1);
+  const [title, setTitle] = useState('');
+  const [difficulty, setDifficulty] = useState<Difficulty>('medium');
+  const [tagsInput, setTagsInput] = useState('');
+  const [points, setPoints] = useState(10);
+  const [timeLimit, setTimeLimit] = useState(30);
+  const [problemContent, setProblemContent] = useState(initialProblemTemplate);
+  const [solutionContent, setSolutionContent] = useState('');
+  const [hintsContent, setHintsContent] = useState('');
+  const [force, setForce] = useState(false);
 
-  // In a real app, this would check for admin role
-  // if (!user || user.role !== 'admin') {
-  //   redirect('/');
-  // }
+  const [loadingSubjects, setLoadingSubjects] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [syncing, setSyncing] = useState(false);
+
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [syncLog, setSyncLog] = useState('');
+
+  const tags = useMemo(() => {
+    return tagsInput
+      .split(',')
+      .map((tag) => tag.trim())
+      .filter(Boolean);
+  }, [tagsInput]);
+
+  const hints = useMemo(() => {
+    return hintsContent
+      .split('\n')
+      .map((hint) => hint.trim())
+      .filter(Boolean);
+  }, [hintsContent]);
+
+  async function loadSubjects() {
+    setLoadingSubjects(true);
+    try {
+      const res = await fetch('/api/admin/exercises');
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error((data as ApiError).error || 'Không thể tải danh sách môn học');
+      }
+      setKnownSubjects(data.subjects ?? []);
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Không thể tải danh sách môn học');
+    } finally {
+      setLoadingSubjects(false);
+    }
+  }
+
+  useEffect(() => {
+    loadSubjects();
+  }, []);
+
+  async function onCreateExercise(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSubmitting(true);
+    setSuccessMessage('');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/admin/exercises', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subject: subjectInput,
+          chapter,
+          exercise,
+          title,
+          difficulty,
+          tags,
+          points,
+          timeLimit,
+          content: problemContent,
+          solution: solutionContent,
+          hints,
+          force,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error((data as ApiError).error || 'Tạo bài tập thất bại');
+      }
+
+      setSuccessMessage(`Đã tạo bài tập thành công tại ${data.path}`);
+      setSolutionContent('');
+      setHintsContent('');
+      setForce(false);
+      await loadSubjects();
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Tạo bài tập thất bại');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function onSyncExercises() {
+    setSyncing(true);
+    setSuccessMessage('');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch('/api/admin/exercises/sync', {
+        method: 'POST',
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        const payload = data as ApiError;
+        throw new Error(payload.details || payload.error || 'Sync thất bại');
+      }
+
+      setSuccessMessage('Đồng bộ lên Supabase thành công');
+      setSyncLog([data.stdout, data.stderr].filter(Boolean).join('\n'));
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Sync thất bại');
+    } finally {
+      setSyncing(false);
+    }
+  }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Trang quản trị
-        </h1>
+    <div className="mx-auto max-w-5xl p-6 space-y-6">
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Web quản trị CS Hub</h1>
         <p className="text-gray-600 dark:text-gray-400">
-          Quản lý hệ thống tài liệu và ngườ dùng
+          Upload bài tập mới, cập nhật nội dung và đồng bộ dữ liệu lên hệ thống.
         </p>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        {stats.map((stat) => {
-          const Icon = stat.icon;
-          const TrendIcon = stat.trend === 'up' ? TrendingUp : TrendingDown;
-          
-          return (
-            <Card key={stat.title}>
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">{stat.title}</p>
-                    <p className="text-3xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
-                    <div className="flex items-center gap-1 mt-2">
-                      <TrendIcon
-                        className={`w-4 h-4 ${
-                          stat.trend === 'up' ? 'text-green-500' : 'text-red-500'
-                        }`}
-                      />
-                      <span
-                        className={`text-sm ${
-                          stat.trend === 'up' ? 'text-green-500' : 'text-red-500'
-                        }`}
-                      >
-                        {stat.change}
-                      </span>
-                      <span className="text-sm text-gray-500"> so với tháng trước</span>
-                    </div>
-                  </div>
-                  
-                  <div className={`w-12 h-12 ${stat.color} rounded-xl flex items-center justify-center`}>
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
+      {successMessage ? (
+        <Alert>
+          <CheckCircle2 className="h-4 w-4" />
+          <AlertTitle>Thành công</AlertTitle>
+          <AlertDescription>{successMessage}</AlertDescription>
+        </Alert>
+      ) : null}
 
-      {/* Management Tabs */}
-      <Tabs defaultValue="users" className="w-full">
-        <TabsList className="mb-6">
-          <TabsTrigger value="users">Ngườ dùng</TabsTrigger>
-          <TabsTrigger value="documents">Tài liệu</TabsTrigger>
-          <TabsTrigger value="support">Hỗ trợ</TabsTrigger>
+      {errorMessage ? (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Lỗi</AlertTitle>
+          <AlertDescription>{errorMessage}</AlertDescription>
+        </Alert>
+      ) : null}
+
+      <Tabs defaultValue="create" className="w-full">
+        <TabsList>
+          <TabsTrigger value="create">Tạo bài tập</TabsTrigger>
+          <TabsTrigger value="sync">Đồng bộ</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="users">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Danh sách ngườ dùng</CardTitle>
-              <Button size="sm">
-                <Plus className="w-4 h-4 mr-1" />
-                Thêm ngườ dùng
-              </Button>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-gray-200 dark:border-gray-700">
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Tên</th>
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Email</th>
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Vai trò</th>
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Ngày tham gia</th>
-                      <th className="text-right py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Thao tác</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentUsers.map((user) => (
-                      <tr key={user.id} className="border-b border-gray-100 dark:border-gray-800">
-                        <td className="py-3 px-4">{user.name}</td>
-                        <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{user.email}</td>
-                        <td className="py-3 px-4">
-                          <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>
-                            {user.role === 'admin' ? 'Admin' : 'User'}
-                          </Badge>
-                        </td>
-                        <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{user.joined}</td>
-                        <td className="py-3 px-4 text-right">
-                          <Button variant="ghost" size="icon">
-                            <MoreVertical className="w-4 h-4" />
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="documents">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Tài liệu gần đây</CardTitle>
-              <Button size="sm">
-                <Plus className="w-4 h-4 mr-1" />
-                Upload tài liệu
-              </Button>
-            </CardHeader>
-            <CardContent>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-gray-200 dark:border-gray-700">
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Tên tài liệu</th>
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Môn học</th>
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Kích thước</th>
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Thờ gian</th>
-                      <th className="text-right py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Thao tác</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentDocuments.map((doc) => (
-                      <tr key={doc.id} className="border-b border-gray-100 dark:border-gray-800">
-                        <td className="py-3 px-4">{doc.title}</td>
-                        <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{doc.subject}</td>
-                        <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{doc.size}</td>
-                        <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{doc.uploaded}</td>
-                        <td className="py-3 px-4 text-right">
-                          <Button variant="ghost" size="icon">
-                            <MoreVertical className="w-4 h-4" />
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="support">
+        <TabsContent value="create">
           <Card>
             <CardHeader>
-              <CardTitle>Yêu cầu hỗ trợ</CardTitle>
+              <CardTitle>Upload bài tập mới</CardTitle>
+              <CardDescription>
+                Bài tập sẽ được tạo vào thư mục <code>exercises/&lt;subject&gt;/chapter-xx/bai-tap-xx</code>.
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-gray-200 dark:border-gray-700">
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Vấn đề</th>
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Ngườ gửi</th>
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Trạng thái</th>
-                      <th className="text-left py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Thờ gian</th>
-                      <th className="text-right py-3 px-4 font-medium text-gray-600 dark:text-gray-400">Thao tác</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {supportTickets.map((ticket) => (
-                      <tr key={ticket.id} className="border-b border-gray-100 dark:border-gray-800">
-                        <td className="py-3 px-4">{ticket.title}</td>
-                        <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{ticket.user}</td>
-                        <td className="py-3 px-4">
-                          <Badge
-                            variant={
-                              ticket.status === 'open'
-                                ? 'default'
-                                : ticket.status === 'pending'
-                                ? 'secondary'
-                                : 'outline'
-                            }
+              <form className="space-y-5" onSubmit={onCreateExercise}>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="subject">Môn học (slug)</Label>
+                    <Input
+                      id="subject"
+                      value={subjectInput}
+                      onChange={(event) => setSubjectInput(event.target.value)}
+                      placeholder="lap-trinh-c"
+                      required
+                    />
+                    <div className="flex flex-wrap gap-2">
+                      {loadingSubjects ? (
+                        <Badge variant="secondary">Đang tải môn học...</Badge>
+                      ) : knownSubjects.length === 0 ? (
+                        <Badge variant="secondary">Chưa có môn học nào</Badge>
+                      ) : (
+                        knownSubjects.map((subject) => (
+                          <button
+                            key={subject}
+                            className="text-xs rounded-md border px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-800"
+                            type="button"
+                            onClick={() => setSubjectInput(subject)}
                           >
-                            {ticket.status === 'open' && 'Mở'}
-                            {ticket.status === 'pending' && 'Đang xử lý'}
-                            {ticket.status === 'resolved' && 'Đã giải quyết'}
-                          </Badge>
-                        </td>
-                        <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{ticket.created}</td>
-                        <td className="py-3 px-4 text-right">
-                          <Button variant="ghost" size="icon">
-                            <MoreVertical className="w-4 h-4" />
-                          </Button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                            {subject}
+                          </button>
+                        ))
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="title">Tên bài tập</Label>
+                    <Input
+                      id="title"
+                      value={title}
+                      onChange={(event) => setTitle(event.target.value)}
+                      placeholder="Tính tổng 2 số nguyên"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="chapter">Chương</Label>
+                    <Input
+                      id="chapter"
+                      type="number"
+                      min={1}
+                      value={chapter}
+                      onChange={(event) => setChapter(Number(event.target.value))}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="exercise">Bài số</Label>
+                    <Input
+                      id="exercise"
+                      type="number"
+                      min={1}
+                      value={exercise}
+                      onChange={(event) => setExercise(Number(event.target.value))}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="points">Điểm</Label>
+                    <Input
+                      id="points"
+                      type="number"
+                      min={1}
+                      value={points}
+                      onChange={(event) => setPoints(Number(event.target.value))}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="timeLimit">Thời gian (phút)</Label>
+                    <Input
+                      id="timeLimit"
+                      type="number"
+                      min={1}
+                      value={timeLimit}
+                      onChange={(event) => setTimeLimit(Number(event.target.value))}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="difficulty">Độ khó</Label>
+                    <select
+                      id="difficulty"
+                      value={difficulty}
+                      onChange={(event) => setDifficulty(event.target.value as Difficulty)}
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    >
+                      <option value="easy">easy</option>
+                      <option value="medium">medium</option>
+                      <option value="hard">hard</option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="tags">Tags (ngăn cách dấu phẩy)</Label>
+                    <Input
+                      id="tags"
+                      value={tagsInput}
+                      onChange={(event) => setTagsInput(event.target.value)}
+                      placeholder="vong-lap, mang, con-tro"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="problemContent">Nội dung đề bài (Markdown)</Label>
+                  <Textarea
+                    id="problemContent"
+                    className="min-h-[220px]"
+                    value={problemContent}
+                    onChange={(event) => setProblemContent(event.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="solutionContent">Lời giải (Markdown, tùy chọn)</Label>
+                  <Textarea
+                    id="solutionContent"
+                    className="min-h-[180px]"
+                    value={solutionContent}
+                    onChange={(event) => setSolutionContent(event.target.value)}
+                    placeholder="# Lời giải..."
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="hintsContent">Gợi ý (mỗi dòng là 1 gợi ý)</Label>
+                  <Textarea
+                    id="hintsContent"
+                    className="min-h-[140px]"
+                    value={hintsContent}
+                    onChange={(event) => setHintsContent(event.target.value)}
+                    placeholder="Đọc kỹ đề bài trước khi code&#10;Tách bài toán thành từng bước"
+                  />
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <Checkbox
+                    id="force"
+                    checked={force}
+                    onCheckedChange={(checked) => setForce(Boolean(checked))}
+                  />
+                  <Label htmlFor="force">Ghi đè nếu bài tập đã tồn tại</Label>
+                </div>
+
+                <div className="flex justify-end">
+                  <Button type="submit" disabled={submitting}>
+                    <Upload className="mr-2 h-4 w-4" />
+                    {submitting ? 'Đang tạo...' : 'Tạo bài tập'}
+                  </Button>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="sync">
+          <Card>
+            <CardHeader>
+              <CardTitle>Đồng bộ lên Supabase</CardTitle>
+              <CardDescription>
+                Chạy script <code>scripts/sync-exercises.js</code> để upsert toàn bộ bài tập hiện có.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Button onClick={onSyncExercises} disabled={syncing}>
+                <RefreshCw className={`mr-2 h-4 w-4 ${syncing ? 'animate-spin' : ''}`} />
+                {syncing ? 'Đang đồng bộ...' : 'Sync ngay'}
+              </Button>
+
+              <Textarea
+                readOnly
+                className="min-h-[280px] font-mono text-xs"
+                value={syncLog || 'Log đồng bộ sẽ hiển thị ở đây.'}
+              />
             </CardContent>
           </Card>
         </TabsContent>

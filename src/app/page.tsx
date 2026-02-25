@@ -93,22 +93,25 @@ export default function HomePage() {
             })}
           </div>
 
-          {/* Scroll Indicator */}
-          <button
-            onClick={scrollToSubjects}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
-          >
-            <ChevronDown className="w-8 h-8 text-gray-400" />
-          </button>
         </div>
       </section>
+
+      {/* Scroll Indicator */}
+      <div className="relative">
+        <button
+          onClick={scrollToSubjects}
+          className="absolute -top-16 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer hover:text-blue-600 transition-colors"
+        >
+          <ChevronDown className="w-8 h-8 text-gray-400 hover:text-blue-600" />
+        </button>
+      </div>
 
       {/* Subjects Section */}
       <section
         ref={subjectsRef}
         className={cn(
-          'py-20 px-4 sm:px-6 lg:px-8 transition-all duration-500',
-          showSubjects ? 'opacity-100' : 'opacity-0'
+          'px-4 sm:px-6 lg:px-8 transition-all duration-500 overflow-hidden',
+          showSubjects ? 'opacity-100 py-20 max-h-[5000px]' : 'opacity-0 py-0 max-h-0'
         )}
       >
         <div className="max-w-7xl mx-auto">
